@@ -1,0 +1,257 @@
+intro: Use /start to restart the game, use /help for help.
+help: |
+  Use /start to restart game.
+  Use /help for help.
+  Use /highscores to view top-10 scores table.
+  You can write to @alex\_ac for help.
+ask_name: Name your player.
+story: >
+  You've just put a kettle on a stove (you have a gas stove), when lights went out.
+  It isn't strange, in your village it's an everyday story. But you must go and check what has happened.
+take: Take {}
+took: Took {}.
+talk: Talk to {}
+show_inventory: What's in my pockets?
+you_won: You won with {} turns, {} money and score {}.
+highscores: |
+  Use /highscores to view this list.
+
+  {}
+highscore: >
+  #{}. {} ({} turns, {} money) score: {}
+inventory: >
+  You looked into your pockets and found:
+
+  {}
+inventory_money: You looked into your pockets and found money ({}).
+money: money
+wrong_action: What did you say?
+locations:
+  home_sweet_home:
+    description: You're at home.
+    generator_works: Generator rattles a little.
+    generator_stopped: Generator stopped and cold.
+    light: Lights glow.
+    no_light: There are still no lights.
+    turn_off_gas: Turn off gas
+    gas_turned_off: You turned off gas.
+    turn_on_gas: Turn on gas
+    gas_turned_on: You turned on gas.
+    look_at_window: Look at the window
+    install_generator: Install generator
+    generator_installed: You installed generator on a gas.
+    burnt: >
+      You can't continue to install {} with burn on a hand.
+    hot: >
+      It's hard to install {} on a turned on gas.
+      You burned a hand.
+    at_street: >
+      There are no lights in the whole village.
+      It looks like another big accident which was a week ago.
+      Will electricity work well here someday?
+    gas_on: Gas is on.
+    gas_off: Gas is off.
+    kettle_on_gas: The kettle is on the stove.
+    inspect_table: Look on the table
+    nothing_found: There is nothing interesting.
+    got_electric_company_receipts: >
+      You found some payment receipts for a local electric company.
+    build_alcohol_machine: Build alcohol machine
+    alcohol_machine_built: You built alcohol machine.
+    install_alcohol_machine: Install alcohol machine
+    alcohol_machine_installed: You installed acohol machine.
+    make_booze: Make some booze
+    made_booze: >
+      You mixed barm and sugar in water and used your alcohol machine to make some booze.
+    go_to:
+      street: Go out
+  street:
+    description: >
+      You're on the street.
+      There are still no lights in the whole village.
+      Some people are looking out from windows.
+      Somebody went out like you did.
+    go_to:
+      home_sweet_home: Go back home
+      electry_company: Go to electric company
+      hospital: Go to hospital
+      garage: Go to garage
+      shop: Go to shop
+      junkyard: Go to junkyard
+  junkyard:
+    description: >
+      You're on the large junkyard with lot's of random almost broken things.
+      You can search for something interesting here.
+    try_find_something: Try to find something
+    nothing_found: You can't find anything interesting.
+    found: You found {}.
+    already_searched: You already searched recently.
+    go_to:
+      street: Go back to the street
+  hospital:
+    description: >
+      You're in the hospital.
+      They have electricity.
+      How did the hell they get it?
+      There are no lights in the whole village.
+    go_to:
+      street: Go back to the street
+  garage:
+    description: >
+      You're in a big dirty garage with lots of parts of different
+      strange machines all around. Somewhere here must be a mechanic.
+    go_to:
+      street: Go back to the street
+  electry_company:
+    description: >
+      The electric company is situated in a small dilapidated building.
+      Usually there are only two people inside: a fat and slow administrator,
+      which never gives you what you want until you give him dozen of papers
+      saying what you want and proving that he really has to do it for you.
+      The second person is an always drunk electrician, which never goes to fix
+      something, until you promise him some booze (and it's the only way to make
+      him do something).
+
+      Administrator drives a pen over some papers like always.
+    electrician: Electrician sleeps.
+    go_to:
+      street: Go back to the street
+  shop:
+    description: >
+      You're in the shop. You can buy some goods here.
+    go_to:
+      street: Go back to the street
+npcs:
+  electrician:
+    name: Electrician
+    greeting: Umnh-omn... Bo-oze?..
+    nothing: Nothing
+    check_blackout: You must check blackout reason, mustn't?
+    check_requirements: I-I wa-ant bo-o-oze... Gi-ve me bo-o-oze and I'll che-e-eck it.
+    will_check: Ok-ok, I'll go-o and check.
+  electric_company_administrator:
+    name: Administrator
+    greeting: Have you bring the payment for the next month?
+    ask_whats_a_reason: What's a reason for the current blackout?
+    no_info: >
+      Electric company administration does not provide any information in such a way.
+      Please fill a paper request for information.
+      Company will response to the request by a post-service during a week.
+    nothing: Nothing
+    go_out: Don't waste my time! Don't you see that I'm working?
+    try_fill_request: I want to fill an information request.
+    request_prerequesties: >
+      You need to fill C-53 form named "Information request".
+      You have to prove that you are a customer of electric company and that
+      you haven't had a debt during last year.
+    request_accepted: >
+      Your request has been accepted.
+      You will be notified by a post-service during a week.
+  doctor:
+    name: Doctor
+    greeting: Have you hurt something?
+    ask_about_light: How did you get electricity for the hospital?
+    backup_generator: >
+      We have an old backup generator.
+      We have to have an alternate energy source because electricity can disappear when
+      surgical operation is in progress.
+    nothing: Nothing.
+    be_careful: Be careful.
+    heal_me: I've burned my hand.
+    healed: >
+      Let me look. What a bad burn... Let's handle it.
+
+      Ok, that's better.
+  mechanic:
+    name: Mechanic
+    greeting: Did you broke something?
+    nothing: Nothing.
+    bye: Bye.
+    can_you_build_generator: Can you build generator?
+    generator: >
+      Yes, I can. But I'll need some parts and
+      it will cost you some money.
+      Give a list of reqired parts.
+
+      You'll need a magnet, copper-wire, piston, valves and something to
+      boil a water.
+    build_generator: I brought all parts for generator.
+    generator_builded: >
+      Then let's build it!
+
+      Here it is. Give it.
+  merchant:
+    name: Merchant
+    greeting: Do you want to buy something?
+    wanna_buy: Show me your goods
+    wanna_sell: I want to sell something
+    buy: Buy {} for {}
+    bought: Bought {} for {}
+    sell: Sell {} for {}
+    sold: Sold {} for {}
+    not_enought_money: Not enought money to buy {} for {}
+    what: Please, choose.
+    nothing: Nothing
+    something_more: Do you want to buy something more?
+    come_again: Come again later.
+  genry:
+    name: Genry
+    greeting: Nice to meet you, {}.
+    ask_about_machine: Hi, Genry. What's up?
+    machine: >
+      Everybody minds about money. So am I...
+
+      If I had stove like you, I would build a alcohol machine
+      and sell booze to the shop. It's really easy to build one.
+
+      I always dreamed to do it. I even have a list of required
+      parts. Look.
+    nothing: Nothing
+    bye: Bye then.
+objects:
+  kettle: kettle
+  electric_company_reciepts: Electric company payment receipts
+  generator_requirments_list: List of parts for generator
+  booze: booze
+  magnet: magnet
+  copper_wire: copper-wire
+  valve: valve
+  piston: piston
+  generator: generator
+  bottle: bottle
+  pot: pot
+  sugar: sugar
+  barm: barm
+  pipes: pipes
+  alcohol_machine: alcohol machine
+  alcohol_machine_parts_list: List of parts for alcohol machine
+objects_descriptions:
+  kettle: Just a little rusty kettle
+  electric_company_reciepts: >
+    You can use them to prove that you have no debt for electricity.
+  generator_requirments_list: |
+
+    - magnet
+    - copper wire
+    - piston
+    - valve
+    - something to boil a water
+    - money: 50
+  alcohol_machine_parts_list: |
+
+    - kettle
+    - pot
+    - pipes
+  booze: A bottle of alcohol.
+  magnet: Very strong magnet. Can be used for generator.
+  copper_wire: A long copper wire.
+  valve: Steam valve. Needed for some machines.
+  piston: A little bit rusty steam piston.
+  generator: >
+    Basic steam-engine electric generator constructed from kettle.
+  bottle: A bit dirty empty bottle.
+  pot: A bit battered pot.
+  sugar: Little bag of sugar.
+  barm: Some barm for cooking.
+  pipes: Several thin plastic pipes.
+  alcohol_machine: An alcohol machine can be used to make booze from sugar and barm.
