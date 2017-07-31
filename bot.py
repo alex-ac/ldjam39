@@ -3,6 +3,7 @@
 import argparse
 import datetime
 import logging
+import os
 import sys
 import time
 
@@ -219,9 +220,10 @@ class Bot(transport.Handler):
 
     def on_message(self, transport, message):
         logger.info('%s: %s', message.user.pretty(), message.text)
-        with open('messages.yaml') as f:
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        with open(os.path.join(script_dir, 'messages.yaml')) as f:
             self.messages = yaml.load(f)
-        with open('keyboards.yaml') as f:
+        with open(os.path.join(script_dir, 'keyboards.yaml')) as f:
             self.keyboards = yaml.load(f)
 
         user = User.objects(user_id=message.user.id).first()
@@ -266,19 +268,27 @@ class Bot(transport.Handler):
 def run():
     logging.basicConfig(level='INFO')
     parser = argparse.ArgumentParser()
-    parser.add_argument('token')
-    parser.add_argument('dburl')
+    token = os.environ.get('TOKEN')
+    db_url = os.environ.get('DB_URL')
+    if not token:
+        parser.add_argument('token')
+    if not db_url:
+        parser.add_argument('dburl')
     parser.add_argument('--hotreload', default=False, action='store_true')
     parser.add_argument('--hotreload-internal', default=False, action='store_true')
     args = parser.parse_args()
+    if not token:
+        token = args.token
+    if not db_url:
+        db_url = args.dburl
 
     if args.hotreload:
         command = [sys.executable, sys.argv[0], '--hotreload-internal', args.token, args.dburl]
         return hotreload.run(command)
 
-    db = mongoengine.connect('default', host=args.dburl)
+    db = mongoengine.connect('default', host=db_url)
     bot = Bot()
-    transport = telegram.Transport(bot, args.token)
+    transport = telegram.Transport(bot, token)
     if args.hotreload_internal:
         reload_watcher = hotreload.ReloadWatcher()
 
